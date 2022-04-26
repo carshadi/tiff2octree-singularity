@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# dirty hack: This cluster has single-tenant nodes only and hence
+# does not accept users trying to specify memory requirements.
+# So instead of teaching Dask-Jobqueue to make the memory spec optional, 
+# we remove the conflicting header line just before submitting the job.
+# grep -v '#SBATCH \-\-mem=' ${1} > ${1}.corr
+
+# SSH back to the host (var is passed through to singularity anyway).
+# Then, source /etc/profile to make it feel like an interactive session, 
+# and submit the job.
+ssh $(hostname) -q -t ". /etc/profile && sbatch ${1}.corr"

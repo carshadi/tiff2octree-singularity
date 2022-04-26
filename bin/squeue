@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+# See bin/sbatch for details
+ssh $(hostname) -q -t ". /etc/profile && squeue $@"
