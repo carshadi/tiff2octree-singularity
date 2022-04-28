@@ -42,7 +42,7 @@ From: ubuntu:latest
     git clone https://github.com/JaneliaSciComp/pyktx.git
     git clone https://github.com/JaneliaSciComp/tiff2octree.git
     conda env create -f tiff2octree/environment.yml -p /opt/miniconda3/envs/octree
-    conda activate octree
+    conda activate /opt/miniconda3/envs/octree
     pip install pyktx/
 
     git clone https://github.com/carshadi/tiff2octree-singularity.git
