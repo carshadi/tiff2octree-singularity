@@ -1,11 +1,6 @@
 Bootstrap: docker
 From: ubuntu:latest
 
-%files
-    bin/sbatch /bin/sbatch
-    bin/scancel /bin/scancel
-    bin/squeue /bin/squeue
-
 %environment
     export PATH="/opt/miniconda3/bin:$PATH"
     export PATH="/opt/miniconda3/envs/octree/bin:$PATH"
@@ -37,7 +32,7 @@ From: ubuntu:latest
     apt clean
 
     echo ". /opt/miniconda3/etc/profile.d/conda.sh" >> $SINGULARITY_ENVIRONMENT
-    echo "conda activate octree" >> $SINGULARITY_ENVIRONMENT
+    echo "conda activate /opt/miniconda3/envs/octree" >> $SINGULARITY_ENVIRONMENT
 
     wget -c https://repo.anaconda.com/miniconda/Miniconda3-py39_4.11.0-Linux-x86_64.sh 
     /bin/bash Miniconda3-py39_4.11.0-Linux-x86_64.sh -bfp /opt/miniconda3
@@ -49,6 +44,12 @@ From: ubuntu:latest
     conda env create -f tiff2octree/environment.yml -p /opt/miniconda3/envs/octree
     conda activate octree
     pip install pyktx/
+
+    git clone https://github.com/carshadi/tiff2octree-singularity.git
+    cd tiff2octree-singularity/
+    cp bin/sbatch /bin/sbatch
+    cp bin/scancel /bin/scancel
+    cp bin/squeue /bin/squeue
 
     chmod -R 755 /bin/s*
 

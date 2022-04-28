@@ -9,4 +9,4 @@
 # SSH back to the host (var is passed through to singularity anyway).
 # Then, source /etc/profile to make it feel like an interactive session, 
 # and submit the job.
-ssh $(hostname) -q -t ". /etc/profile && sbatch ${1}.corr"
+ssh $(hostname) -t ". /etc/profile && sbatch ${1}"
