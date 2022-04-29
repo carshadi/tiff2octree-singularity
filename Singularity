@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: ubuntu:latest
+From: debian:latest
 
 %environment
     export PATH="/opt/miniconda3/bin:$PATH"
@@ -39,19 +39,12 @@ From: ubuntu:latest
     . /opt/miniconda3/etc/profile.d/conda.sh
     conda update conda
 
-    git clone https://github.com/JaneliaSciComp/pyktx.git
+    git clone https://github.com/carshadi/pyktx.git
     git clone https://github.com/JaneliaSciComp/tiff2octree.git
     conda env create -f tiff2octree/environment.yml -p /opt/miniconda3/envs/octree
     conda activate /opt/miniconda3/envs/octree
     pip install pyktx/
 
-    git clone https://github.com/carshadi/tiff2octree-singularity.git
-    cd tiff2octree-singularity/
-    cp bin/sbatch /bin/sbatch
-    cp bin/scancel /bin/scancel
-    cp bin/squeue /bin/squeue
+    chmod --recursive a+rw /opt/miniconda3
 
-    chmod -R 755 /bin/s*
-
-
-
+    rm /Miniconda3-py39_4.11.0-Linux-x86_64.sh
