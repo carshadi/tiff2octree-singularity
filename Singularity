@@ -6,6 +6,11 @@ From: debian:latest
     export PATH="/opt/miniconda3/envs/octree/bin:$PATH"
     export PATH="/bin:$PATH"
 
+    export NUM_MKL_THREADS=1
+    export OPENBLAS_NUM_THREADS=1
+    export OPENMP_NUM_THREADS=1
+    export OMP_NUM_THREADS=1
+
 %runscript
     exec "$@"
 
@@ -40,7 +45,7 @@ From: debian:latest
     conda update conda
 
     git clone https://github.com/carshadi/pyktx.git
-    git clone https://github.com/JaneliaSciComp/tiff2octree.git
+    git clone https://github.com/carshadi/tiff2octree.git
     conda env create -f tiff2octree/environment.yml -p /opt/miniconda3/envs/octree
     conda activate /opt/miniconda3/envs/octree
     pip install pyktx/
