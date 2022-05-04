@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --nodes=4
-#SBATCH --ntasks-per-node=2
+#SBATCH --ntasks-per-node=16
 #SBATCH --cpus-per-task=1
 #SBATCH --mem-per-cpu=16GB
 #SBATCH -p compute
@@ -13,13 +13,13 @@
 # Singularity image containing the tiff2octree.py module.
 SIF=tiff2octree.sif
 # fMOST sample directory 
-INPUT_FILE=/bil/users/arshadic/tiff_slices_ch1
+INPUT_FILE=/bil/data/df/75/df75626840c76c15/mouseID_362191-191816/CH2
 # Output octree directory
-OUTPUT_FILE=/bil/users/arshadic/octree_result
+OUTPUT_FILE=/bil/proj/u19zeng/fMOST_octree/mouseID_362191-191816
 # Channel ID (0 or 1)
 CHANNEL=1
 # Num threads to distribute the work
-THREADS=8
+THREADS=64
 # Voxel spacing for the fMOST sample (X,Y,Z). This will generally be
 # found in the metainfo.txt file (if there is one).
 VOXSIZE="0.35,0.35,1.0"
@@ -72,7 +72,7 @@ singularity run \
 $SIF \
 python /tiff2octree/tiff2octree.py \
 -i $INPUT_FILE \
--l 3 \
+-l 5 \
 -o $OUTPUT_FILE \
 -c $CHANNEL \
 -d 2ndmax \
