@@ -76,6 +76,7 @@ python /tiff2octree/tiff2octree.py \
 -o $OUTPUT_FILE \
 -c $CHANNEL \
 -d 2ndmax \
+--dtype uint16 \
 --queue compute \
 -t $THREADS \
 --voxsize $VOXSIZE \
